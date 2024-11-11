@@ -99,7 +99,6 @@ function ProfileApply() {
     // useState(()=>{
     //     ProfileView();
     // }, [])
-    // var token = token.user_mail;
 
     useEffect(()=> {
         // socket.on('connect', () => {
@@ -108,6 +107,7 @@ function ProfileApply() {
         // socket.on('FirstEvent' , (msg) => {
         //      console.log(msg)
         // })
+        var token = token.user_mail;
         socket?.emit('newUser', (token.user_mail))
         // console.log(socket.emit("newUser", (user) => {
         //     console.log(user)

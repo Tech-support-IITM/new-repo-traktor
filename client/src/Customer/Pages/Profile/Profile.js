@@ -100,12 +100,14 @@ function CustomerProfile() {
     }
   }
   return (
-    <div className="flex">
-      <section className="w-[66px]">
+    <div className="flex h-screen">
+      <section className="fixed h-full">
         <SideBar />
       </section>
       <div className="flex-grow">
-        <NavBar />
+          <div className="fixed w-full">
+              <NavBar />
+          </div>
 
         <div className=" flex flex-col items-center justify-center p-2 m-12 border font-semibold">
           Apply for AWS Credits and get cloud credits worth $5000

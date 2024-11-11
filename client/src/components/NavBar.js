@@ -12,7 +12,7 @@ import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.css';
 import { FaEllipsis, FaMessage, FaPerson } from 'react-icons/fa6';
 import Notification from './Notification';
-function NavBar({toggleSideBar}) {
+function NavBar({toggleSideBar, socket}) {
   const [openNav, setOpenNav] = useState(false);
   const openSideBar = () => {
         setOpenNav(!openNav);
@@ -131,6 +131,14 @@ function NavBar({toggleSideBar}) {
         UpdatedFundingData()
     }, 5000)
   }, [])
+// the below code is for notification purpose using socket.io
+  // const [notifications, setNotifications] = useState([])
+  // useEffect(() => {
+  //     socket.on("getNotification", data=> {
+  //       setNotifications((prev) => [...prev, data]);
+  //     })
+  // }, [socket])
+  // console.log(notifications) 
   return (
     <div className="navbar">
           <nav className="dark:bg-gray-900 shadow-sm border-10" style={{ backgroundColor: '#0b5f66' }}>

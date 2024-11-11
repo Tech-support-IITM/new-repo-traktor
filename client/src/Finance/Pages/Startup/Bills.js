@@ -14,9 +14,21 @@ function Bills() {
                             </div>
                             <div className="p-[90px;] h-full">
                                   <h1 className="font-semibold text-gray-500 text-lg">Bills / Funding status</h1>
-                                  <div className="">
+                                  <div className="shadow mt-10">
+                                          <table className="">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>  
+                                                </thead>
+                                                <tbody>
+                                                    <tr className="">
 
-                                  </div>
+                                                    </tr>
+                                                </tbody>
+                                          </table>
+                                  </div> 
                             </div>
             </section>
     </div>

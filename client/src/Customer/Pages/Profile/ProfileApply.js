@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import SideBar from "../../components/SideBar";
 import NavBar from "../../../components/NavBar";
 import axios from "axios";
@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import {Bounce, ToastContainer, toast} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate} from "react-router-dom";
+import {socket} from '../../../socket';
 function ProfileApply() {
     let token = jwtDecode(localStorage.getItem('token'));
     // const [form] = Form.useForm();
@@ -98,13 +99,29 @@ function ProfileApply() {
     // useState(()=>{
     //     ProfileView();
     // }, [])
+    // var token = token.user_mail;
+
+    useEffect(()=> {
+        // socket.on('connect', () => {
+        //     console.log('Connected to server')
+        // })
+        // socket.on('FirstEvent' , (msg) => {
+        //      console.log(msg)
+        // })
+        socket?.emit('newUser', (token.user_mail))
+        // console.log(socket.emit("newUser", (user) => {
+        //     console.log(user)
+        // }));
+    })
     return (
-        <div className="flex">
-            <section className="w-[66px]">
+        <div className="flex h-screen">
+            <section className="fixed h-full">
                 <SideBar />
             </section>
             <div className="flex-grow">
-                <NavBar />
+                    <div className="fixed w-full">
+                        <NavBar />
+                    </div>
                     <div className="items-center px-4 py-4 mt-2 sm:mt-10 md:mt-1 p-8">
                             <span className=" p-5 text-slate-500 text-sm">
                                 Dashboard / AWS Credits /Apply

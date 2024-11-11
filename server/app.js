@@ -49,6 +49,12 @@ const IndividualStartups = require('./routes/route');
 const multer = require('multer')
 const upload = multer({dest: 'uploads/'})
 const app = express();
+const http = require('http').createServer(app);
+var io = require('socket.io')(http, {
+    cors: {
+        origin: '*',
+    }
+});
 app.get('/images/:key', (req, res) => {
     //console.log(req.query)
     const fileKey = req.params.key;
@@ -59,10 +65,8 @@ app.get('/images/:key', (req, res) => {
 app.post('/imagess', upload.single('image'), async(req, res) => {
     const file = req.file
     console.log(file)
-
     const result = await uploadFile(file)
     console.log(result)
-
     //const description = req.body.description
     res.send({imagePath : `/images/${result.Key}`})
 } )
@@ -74,6 +78,42 @@ app.use(bodyParser.json());
 app.listen('3003', (err)=> {
     if(err) process.exit(1);
     console.log("working");
+})
+let onlineUsers = [];
+const addNewUser = (username, socketId) => {
+    !onlineUsers.some((user)=>user.username === username) && 
+            onlineUsers.push({username, socketId})
+
+    console.log('da')
+}
+console.log(onlineUsers);
+
+const removeUser = (socketId) => {
+    onlineUsers = onlineUsers.filter((user) => user.socketId !== socketId);
+}
+const getUser = (username) => {
+    return onlineUsers.find((user) => user.username === username)
+}
+http.listen(5000, function() {
+    console.log("listening on *: 5000");
+});
+io.on('connection', function(socket) {
+    
+    //console.log("a user has connected!");
+    //io.to('ISm3D19Ll91AuyU8AAAC').emit("FirstEvent", "Hello Test");
+    socket.on('newUser', (username) => {
+        addNewUser(username, socket.id);
+    })
+    socket.on("sendText", ({ senderName, receiverName, text }) => {
+        const receiver = getUser(receiverName);
+        io.to(receiver.socketId).emit("getText", {
+          senderName,
+          text,
+        });
+      });
+    socket.on("disconnect", () => {
+        removeUser(socket.id);
+    });
 })
 app.use('api/v1/', IndividualStartups);
 app.use('api/v1/', ScheduleMentorMeeting);

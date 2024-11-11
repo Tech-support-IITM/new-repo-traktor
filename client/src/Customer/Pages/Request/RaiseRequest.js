@@ -56,12 +56,13 @@ const RaiseRequest = () => {
    };
   return (
     <div className="flex">
-      <section className="w-[66px]">
+      <section className="fixed h-full">
         <SideBar />
       </section>
-
       <div className="flex-grow">
-        <NavBar />
+        <div className="fixed w-full">
+            <NavBar />
+        </div>
         <div className="items-center px-4 py-4 mt-2 sm:mt-10 md:mt-1 p-8 ">
           <span className=" p-2 text-slate-500 text-md ">
             Home / Request

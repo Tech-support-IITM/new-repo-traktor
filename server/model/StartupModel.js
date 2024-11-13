@@ -825,6 +825,124 @@ const StartupDataModel = async() => {
                     }
                 })
             })
+
+
+            const ManufacturingMentorScheduleCount = new Promise((resolveQuery43, rejectQuery43) => {
+                client.query("select COUNT(ms.startup) as startup_name from mentor_schedule ms JOIN test_startup t ON t.official_email_address = ms.startup WHERE t.basic::json->>'startup_program'='Manufacturing & Industry';", (err, result) => {
+                    if(err)
+                    {
+                        rejectQuery43(err)
+                    }
+                    else
+                    {
+                       resolveQuery43(result);    
+                    }
+                })
+            })
+
+            const EnergyMentorScheduleCount = new Promise((resolveQuery44, rejectQuery44) => {
+                client.query("select COUNT(ms.startup) as startup_name from mentor_schedule ms JOIN test_startup t ON t.official_email_address = ms.startup WHERE t.basic::json->>'startup_program'='Energy & Environment';", (err, result) => {
+                    if(err)
+                    {
+                        rejectQuery44(err);
+                    }
+                    else
+                    {
+                        resolveQuery44(result);
+                    }
+                })
+            })
+
+            const HardwareMentorScheduleCount = new Promise((resolveQuery45, rejectQuery45) => {
+                client.query("select COUNT(ms.startup) as startup_name from mentor_schedule ms JOIN test_startup t ON t.official_email_address = ms.startup WHERE t.basic::json->>'startup_program'='Hardware & IOT';", (err, result) => {
+                    if(err)
+                    {
+                        rejectQuery45(err);
+                    }
+                    else
+                    {
+                        resolveQuery45(result);
+                    }
+                })
+            })
+
+            const SoftwareMentorScheduleCount = new Promise((resolveQuery46, rejectQuery46) => {
+                client.query("select COUNT(ms.startup) as startup_name from mentor_schedule ms JOIN test_startup t ON t.official_email_address = ms.startup WHERE t.basic::json->>'startup_program'='Software & Data';", (err, result) => {
+                    if(err)
+                    {
+                        rejectQuery46(err);
+                    }
+                    else
+                    {
+                        resolveQuery46(result);
+                    }
+                })
+            })
+
+            const EdtechMentorScheduleCount = new Promise((resolveQuery47, rejectQuery47) => {
+                client.query("select COUNT(ms.startup) as startup_name from mentor_schedule ms JOIN test_startup t ON t.official_email_address = ms.startup WHERE t.basic::json->>'startup_program'='Edtech';", (err, result) => {
+                    if(err)
+                    {
+                        rejectQuery47(err);
+                    }
+                    else
+                    {
+                        resolveQuery47(result);
+                    }
+                })
+            })
+
+            const ServiceMentorScheduleCount = new Promise((resolveQuery48, rejectQuery48) => {
+                client.query("select COUNT(ms.startup) as startup_name from mentor_schedule ms JOIN test_startup t ON t.official_email_address = ms.startup WHERE t.basic::json->>'startup_program'='services';", (err, result) => {
+                    if(err)
+                    {
+                        rejectQuery48(err);
+                    }
+                    else
+                    {
+                        resolveQuery48(result);
+                    }
+                })
+            })
+            
+            const AgricultureMentorScheduleCount = new Promise((resolveQuery49, rejectQuery49) => {
+                client.query("select COUNT(ms.startup) as startup_name from mentor_schedule ms JOIN test_startup t ON t.official_email_address = ms.startup WHERE t.basic::json->>'startup_program'='Agriculture & Food';", (err, result) => {
+                    if(err)
+                    {
+                        rejectQuery49(err);
+                    }
+                    else
+                    {
+                        resolveQuery49(result);
+                    }
+                })
+            })
+
+            const EcommerceMentorScheduleCount = new Promise((resolveQuery50, rejectQuery50) => {
+                client.query("select COUNT(ms.startup) as startup_name from mentor_schedule ms JOIN test_startup t ON t.official_email_address = ms.startup WHERE t.basic::json->>'startup_program'='Ecommerce & Retail';", (err, result) => {
+                    if(err)
+                    {
+                        rejectQuery50(err);
+                    }
+                    else
+                    {
+                        resolveQuery50(result);
+                    }
+                })
+            })
+
+            const SocialMentorScheduleCount = new Promise((resolveQuery51, rejectQuery51) => {
+                client.query("select COUNT(ms.startup) as startup_name from mentor_schedule ms JOIN test_startup t ON t.official_email_address = ms.startup WHERE t.basic::json->>'startup_program'='Social & Leisure';", (err, result) => {
+                    if(err)
+                    {
+                        rejectQuery51(err);
+                    }
+                    else
+                    {
+                        resolveQuery51(result);
+                    }
+                })
+            })
             //SELECT ts.basic->>'program' AS program, ts.official_email_address, ts.basic->>'startup_name' AS startup_name,SUM(uf.amount) AS amount_total FROM test_startup ts LEFT JOIN update_funding uf ON uf.sta
 //rtup_name = ts.official_email_address WHERE ts.basic->>'program' = 'Pratham' GROUP BY ts.official_email_address;
 
@@ -869,7 +987,16 @@ const StartupDataModel = async() => {
                 PrathamFundUtilized,
                 AksharFundUtilized,
                 MenWomen,
-                Women
+                Women,
+                ManufacturingMentorScheduleCount,
+                EnergyMentorScheduleCount,
+                HardwareMentorScheduleCount,
+                SoftwareMentorScheduleCount,
+                EdtechMentorScheduleCount,
+                ServiceMentorScheduleCount,
+                AgricultureMentorScheduleCount,
+                EcommerceMentorScheduleCount,
+                SocialMentorScheduleCount
                 ])
             .then(([TotalCountStartups, ActiveStartups, DroppedStartups, GraduatedStartups, Manufacturing, Services, Edtech, Agriculture, Hardware, Energy, Ecommerce, Social, SoftwareData, EnergyPratham, ManufacturingPratham, HardwarePratham, SoftwareDataPratham, EdtechPratham, ServicesPratham, AgriculturePratham, EcommercePratham, SocialPratham,
                 ManufacturingAkshar,
@@ -909,7 +1036,16 @@ const StartupDataModel = async() => {
                 PrathamFundUtilized,
                 AksharFundUtilized,
                 MenWomen,
-                Women
+                Women,
+                ManufacturingMentorScheduleCount,
+                EnergyMentorScheduleCount,
+                HardwareMentorScheduleCount,
+                SoftwareMentorScheduleCount,
+                EdtechMentorScheduleCount,
+                ServiceMentorScheduleCount,
+                AgricultureMentorScheduleCount,
+                EcommerceMentorScheduleCount,
+                SocialMentorScheduleCount
             ]) => {
                 resolve({
                     TotalCountStartups,
@@ -971,7 +1107,16 @@ const StartupDataModel = async() => {
                     PrathamFundUtilized,
                     AksharFundUtilized,
                     MenWomen,
-                    Women
+                    Women,
+                    ManufacturingMentorScheduleCount,
+                    EnergyMentorScheduleCount,
+                    HardwareMentorScheduleCount,
+                    SoftwareMentorScheduleCount,
+                    EdtechMentorScheduleCount,
+                    ServiceMentorScheduleCount,
+                    AgricultureMentorScheduleCount,
+                    EcommerceMentorScheduleCount,
+                    SocialMentorScheduleCount
                 });
             })
             .catch((err) => {

@@ -5,8 +5,9 @@ import '../../../components/styles/style.css'
 import LineChart from "../../../components/LineChart";
 import axios from "axios";
 import { ApiFetchMentorCount } from "../../../API/API";
+import MentorscheduleChart from "../../../components/Mentorschedule";
 function Mentor(props){
-    console.log(props)
+    // console.log(props)
     const [show, setShow] = useState(false);
     const [data, setData] = useState([]); 
     const getData = async() => {
@@ -56,11 +57,15 @@ function Mentor(props){
                             <div className="grid md:grid-cols-2 gap-6 mt-10 mb-2">
                                 <div className="shadow-md rounded-lg w-[100%;] border md:h-[435px;]">
                                         <div className="p-2 md:text-md text-gray-600 font-semibold">Top 5 Sectors by Maximum Internal Fund Usage</div>
-                                        <div className="justify-center items-center"><PieChart /></div>
+                                        <div className="justify-center items-center">
+                                            {/* <PieChart /> */}
+                                        </div>
                                 </div>
                                 <div className="shadow-md rounded-lg w-[100%;] border">
                                     <div className="p-3 pt-2 md:text-md text-gray-600 font-semibold">Funding Distributed across Sectors</div>
-                                    <div className="justify-center items-center"><PieChart /></div>
+                                    <div className="justify-center items-center">
+                                        {/* <PieChart /> */}
+                                    </div>
                                 </div>
                             </div>
                     </div>
@@ -70,17 +75,17 @@ function Mentor(props){
                                     <div className="p-2 pt-1 text-xs text-gray-600 font-semibold">Women across industry</div>
                                     <div className="flex justify-center items-center mb-1">
                                         <div className="w-50 h-50 overflow-hidden">
-                                            <DonutChart/>
+                                            {/* <DonutChart/> */}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="grid grid-cols-1 gap-3">
                                 <div className="shadow-md font-semibold rounded-lg w-full md:h-[300px;] border">
-                                    <div className="p-2 pt-1 text-sm text-gray-600 font-semibold">Total Mentoring hours across sector</div>
+                                    <div className="p-2 pt-1 text-sm text-gray-600 font-semibold">Total Mentoring across sector</div>
                                     <div className="flex justify-center items-center mb-1">
                                         <div className="w-50 h-50 overflow-hidden">
-                                            <DonutChart/>
+                                            <MentorscheduleChart props={props} />
                                         </div>
                                     </div>
                                 </div>

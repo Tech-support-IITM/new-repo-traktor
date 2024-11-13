@@ -139,6 +139,17 @@ const FetchStartupDatainNumbers = async(req, res) => {
             MenWomenRatio : {
                 MenCount: parseInt(result?.MenWomen?.rows[0].male_count),
                 WomenCount: parseInt(result?.Women?.rows[0].female_count)
+            },
+            TotalMentorship : {
+                Manufacturing: parseInt(result?.ManufacturingMentorScheduleCount?.rows[0]?.startup_name),
+                Energy: parseInt(result?.EnergyMentorScheduleCount?.rows[0]?.startup_name),
+                Hardware: parseInt(result?.HardwareMentorScheduleCount?.rows[0]?.startup_name),
+                Software: parseInt(result?.SoftwareMentorScheduleCount?.rows[0]?.startup_name),
+                Edtech: parseInt(result?.EdtechMentorScheduleCount?.rows[0]?.startup_name),
+                Service: parseInt(result?.ServiceMentorScheduleCount?.rows[0]?.startup_name),
+                Agriculture: parseInt(result?.AgricultureMentorScheduleCount?.rows[0]?.startup_name),
+                Ecommerce: parseInt(result?.EcommerceMentorScheduleCount?.rows[0]?.startup_name),
+                Social: parseInt(result?.SocialMentorScheduleCount?.rows[0]?.startup_name)
             }
         }
         //sectorwise total funding utilized

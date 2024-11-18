@@ -36,23 +36,17 @@ const ProfilePhoto = async(req, res) => {
                 res.status(200).json({Key: response.Key});
                 //res.send(result.result);
             }
+            else if(result.result.rows[0].user_role==5 && result.result.rows[0].user_department=='student')
+            {
+                let key = result.result.rows[0].profile_photo;
+                let dept = 'Teams'
+                const response = await ListAdminSingleFile(key, dept);
+                res.status(200).json({Key: response.Key});
+            }
             else
             {
                 res.status(200).json(null);
             }
-            // let key = result.result.rows[0].profile_photo
-            // //console.log(key)
-            // if(result)
-            // {
-            //     const response = await ListAdminSingleFile(key);
-            //     res.status(200).json({Key: response.Key});
-            //     //console.log(response);
-            // }
-            //res.json(result.result.rows[0].profile_photo);
-            // let data = result.result.rows[0].profile_photo
-            //console.log(result.result)
-            //console.log(data);
-
     }
     catch(err)
     {

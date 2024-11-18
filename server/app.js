@@ -45,10 +45,12 @@ const AddFunding = require('./routes/route');
 const ScheduleMentorMeeting = require('./routes/route');
 const UpdateStatus = require('./routes/route');
 const IndividualStartups = require('./routes/route');
+const IPdataUpload = require('./routes/route');
 // const {uploadFile, getFileStream} = require('./utils/s3');
 const multer = require('multer')
 const upload = multer({dest: 'uploads/'})
 const app = express();
+const ProfilePhoto = require('./routes/route');
 const http = require('http').createServer(app);
 var io = require('socket.io')(http, {
     cors: {
@@ -116,6 +118,7 @@ io.on('connection', function(socket) {
     });
 })
 app.use('api/v1/', IndividualStartups);
+app.use('api/v1/', ProfilePhoto);
 app.use('api/v1/', ScheduleMentorMeeting);
 app.use('/api/v1/', AddFunding);
 app.use('/api/v1/', LoginController);
@@ -158,7 +161,8 @@ app.use('api/v1/', AddMentorHour)
 app.use('api/v1/', FetchDataMentor);
 app.use('api/v1/', ViewNotification);
 app.use('api/v1/', DeleteConnection);
-app.use('api/v1/', DeleteMentorData)
+app.use('api/v1/', DeleteMentorData);
+app.use('api/v1/', upload.single('file'), IPdataUpload);
 module.exports = app;
 
 

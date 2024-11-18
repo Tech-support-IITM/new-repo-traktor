@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const upload = multer(); // For parsing multipart form-data
 const Authenticate = require('../utils/Authenticate.js');
 const LoginController = require('../controller/Admin/LoginController/LoginController');
 const WorkController = require('../controller/Admin/WorkRequestController/WorkRequestController');
@@ -9,7 +11,7 @@ const ResumeUpload = require('../controller/Admin/Resume/ResumeUpload.js');
 const Resumedata = require('../controller/Admin/Resume/Resumedata.js');
 const ApprovalRequest  = require('../controller/Admin/Resume/ApporvalRequest.js');
 const ForgotRequest = require('../controller/Admin/LoginController/ForgotRequest.js');
-const Profile = require('../controller/Admin/Profile/Profile.js');
+const {Profile, ProfilePhoto} = require('../controller/Admin/Profile/Profile.js');
 const DeleteResume = require('../controller/Admin/Resume/DeleteResume.js');
 const AddMentor = require('../controller/Admin/Mentors/AddMentor.js');
 const Settings = require('../controller/Admin/Settings/Settings.js');
@@ -31,6 +33,8 @@ const {FetchMentorData, MentorCount, DeleteMentorData} = require('../controller/
 const AddJob = require('../controller/Team/AddJob.js');
 const {AddFunding, updateFundingNotif} = require('../controller/Finance/AddFunding.js');
 const {ScheduleMentorMeeting} = require('../controller/Admin/Mentorship/Mentorship.js');
+const IPdataUpload = require('../controller/Office/IPdata.js');
+router.get('/prof', ProfilePhoto);
 router.put('/update-status', UpdateStatus)
 router.get('/startup/:id',IndividualStartups)
 router.post('/schedule-meeting', ScheduleMentorMeeting);
@@ -50,7 +54,7 @@ router.post('/resumeupload', ResumeUpload);
 router.get('/get-mentor-details', FetchMentorData);
 router.get('/resume-fetch/:page_data/:page_number', Resumedata);
 router.post('/resume-send', ApprovalRequest);
-router.post('/profile', Profile);
+router.get('/profile/:mail', Profile);
 router.delete('/delete-resume/:id', DeleteResume);
 router.post('/mentor/add', AddMentor);
 router.post('/create-events',CreateEvents);
@@ -73,4 +77,5 @@ router.post('/customer/add-job', AddJob);
 router.get('/notification', updateFundingNotif);
 router.delete('/delete-mentor/:id', DeleteMentorData)
 router.delete('/delete-connection', DeleteConnection);
+router.post('/ipdataupload', IPdataUpload);
 module.exports = router;

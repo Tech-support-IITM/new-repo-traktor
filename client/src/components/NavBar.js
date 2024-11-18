@@ -126,6 +126,32 @@ function NavBar({toggleSideBar, socket}) {
       console.log(err);
     }
   }
+  let imageToken  = localStorage.getItem('token');
+  let tokenDecodedData = jwtDecode(imageToken);
+  let sessionRole = sessionStorage.getItem('role')
+  const [image, setImage] = useState('');
+  const GetProfilePhotoImage = async() => {
+    try
+    {
+        const result = await axios.get(`http://localhost:3003/api/v1/prof?mail=${tokenDecodedData.user_mail}`)
+        let imageUrl = 'https://trktorrr.s3.ap-south-1.amazonaws.com/'
+        if(result)
+        {
+            setImage(imageUrl+result.data.Key);
+            //console.log(image);
+        }
+
+        //console.log(
+    }
+    catch(err)
+    {
+      console.log(err); 
+    }
+  }
+
+  useEffect(() => {
+    GetProfilePhotoImage();
+  }, [])
   useEffect(()=> {
     setInterval(()=> {
         UpdatedFundingData()
@@ -170,7 +196,7 @@ function NavBar({toggleSideBar, socket}) {
                      </button>
                   </li>
                   <li>
-                      <div className="block py-2 px-2 text-white bg-blue-700 rounded md:bg-transparent md:text-gray-300 md:p-1 dark:text-white md:dark:text-blue-500 text-xl hover:text-white rounded-3xl hover:rounded-2xl transition-all duration-300 ease-linear cursor-pointer group; relative -left-10 bg-white" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ><img className="w-8 h-8 rounded-full" src={profile} alt="user photo" />
+                      <div className="block py-2 px-2 text-white bg-blue-700 rounded md:bg-transparent md:text-gray-300 md:p-1 dark:text-white md:dark:text-blue-500 text-xl hover:text-white rounded-3xl hover:rounded-2xl transition-all duration-300 ease-linear cursor-pointer group; relative -left-10 bg-white" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ><img className="w-8 h-8 rounded-full" src={image} alt="user photo" />
                             {profileHover && (
                                 <div className="absolute top-[33px;] right-[-24px;] mt-1 w-30 border bg-white shadow-sm rounded-lg shadow-sm items-center w-[230%]">
                                     <a href="/settings" className="block py-2 px-4 text-sm text-black text-center">Settings</a>

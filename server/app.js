@@ -162,7 +162,7 @@ app.use('api/v1/', FetchDataMentor);
 app.use('api/v1/', ViewNotification);
 app.use('api/v1/', DeleteConnection);
 app.use('api/v1/', DeleteMentorData);
-app.use('api/v1/', upload.single('file'), IPdataUpload);
+app.use('api/v1/', IPdataUpload);
 module.exports = app;
 
 

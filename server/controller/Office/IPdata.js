@@ -14,5 +14,24 @@ const s3 = new S3({
 })
 const  IPdataUpload = async (req, res) => {
    const {team_name, team_head_data, team_phone_number, email_address, team_description, team_vision, team_mission, current_status} = req.body;
+   const data = req?.file || null;
+   try
+   {
+        console.log(data);
+        res.send(team_name)
+   }
+   catch(err)
+   {
+    console.log(err)
+   }
+//    if(data)
+//    {
+//         res.send("Got the file");
+//    }
+//    else
+//    {
+//         res.send("Not working");
+//    }
+   //res.send(team_name);
 }
 module.exports = IPdataUpload;

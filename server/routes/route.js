@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const upload = multer(); // For parsing multipart form-data
+const upload = multer({dest: '../uploads/'}); // For parsing multipart form-data
 const Authenticate = require('../utils/Authenticate.js');
 const LoginController = require('../controller/Admin/LoginController/LoginController');
 const WorkController = require('../controller/Admin/WorkRequestController/WorkRequestController');
@@ -77,5 +77,5 @@ router.post('/customer/add-job', AddJob);
 router.get('/notification', updateFundingNotif);
 router.delete('/delete-mentor/:id', DeleteMentorData)
 router.delete('/delete-connection', DeleteConnection);
-router.post('/ipdataupload', IPdataUpload);
+router.post('/ipdataupload', upload.single('file'),  IPdataUpload);
 module.exports = router;

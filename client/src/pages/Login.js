@@ -174,7 +174,7 @@ function Login() {
                                         type={type}
                                     />
                                     <span class="flex justify-end items-end text-green-400" onClick={handleToggle}>
-                                        <Icon class="absolute mr-3 mb-4" icon={icon} size={25}/>
+                                        <Icon className="absolute mr-3 mb-4" icon={icon} size={25}/>
                                     </span>
                                 </div>
                                 <div className="mt-8 flex justify-between items-center" >

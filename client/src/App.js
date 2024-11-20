@@ -55,6 +55,7 @@ import IndividualStartups from './pages/startups/IndividualStartups.js';
 import Pdf from './pages/Reports/Pdf.js';
 import { PDFViewer } from '@react-pdf/renderer';
 import Bills from './Finance/Pages/Startup/Bills.js';
+import OfficeHome from './Office/Pages/OfficeHome.js';
 function App() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const authenticate = async() => {
@@ -91,6 +92,7 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
+          <Route path="/like" element={<OfficeHome />}/>
            <Route path="/" element={<Login />} /> 
             <Route element={<ProtectedRoutes requiredRoles={[localStorage.getItem('token'), '2']} />}>
                   {/* <Route path="/home" element={<Home />} /> */}

@@ -125,7 +125,8 @@ app.use('/api/v1/', LoginController);
 app.use('api/v1/', ForgotRequest)
 app.use('api/v1/', FetchStartupDatainNumbers)
 app.get('/profile', (req, res) => {
-    res.status(200).json("hello");
+    //const {Test} = req.body;
+    console.log(req.body);
 })
 app.use('api/v1/', UpdateStatus);
 app.use('api/v1/', FetchStartupData);

@@ -9,7 +9,8 @@ import { FaArrowAltCircleDown, FaArrowCircleDown, FaArrowCircleLeft, FaArrowDown
 import {arrowDownCircle} from 'react-icons-kit/feather/arrowDownCircle';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FaPencil } from 'react-icons/fa6';
-import {arrowUpCircle} from 'react-icons-kit/feather/arrowUpCircle'
+import {arrowUpCircle} from 'react-icons-kit/feather/arrowUpCircle';
+import money from '../../assets/images/money.png'
 function IndividualStartups() {
  const {id} = useParams();
  const [data, getData] = useState([]);
@@ -102,6 +103,19 @@ function IndividualStartups() {
                                     </div>
                                     <div className="border mt-2">
                                             <div className="flex justify-between m-3">
+                                                    <div className="text-xl font-semibold">Founders</div>
+                                                    <div className="text-green-600"><FaPencil size={20}/></div>
+                                            </div>
+                                            <div className="flex justify-between m-3">
+                                                    <div className="flex justify-between gap-20">
+                                                        <div className="font-semibold text-green-600 text-lg">{data[0]?.founder?.founder_name}</div>
+                                                        <div className="text-green-600"><button onClick={handleToggle}><Icon icon={arrowChange} size={18} /></button></div>
+                                                    </div>
+                                            </div>
+                                    </div>
+
+                                    <div className="border mt-2">
+                                            <div className="flex justify-between m-3">
                                                     <div className="text-xl font-semibold">Team Members</div>
                                                     <div className="text-green-600"><FaPencil size={20}/></div>
                                             </div>
@@ -112,47 +126,63 @@ function IndividualStartups() {
                                                     </div>
                                             </div>
                                     </div>
-                                    <div className="border mt-2">
+
+                                    <div className="border mt-2 mb-3">
                                                 <div className="grid grid-cols-4 gap-5 m-3">
                                                         <div className="border">
                                                             <div className="flex justify-between p-3">
-                                                                <div><FaMoneyCheck size={36}/></div>
+                                                                <div className="text-green-500"><FaMoneyCheck size={36}/></div>
                                                                 <div>
-                                                                    <span className="md:p-2 font-semibold">Rs.10,00,000</span>
-                                                                    <div className="text-sm font-semibold">Funding Disbursed</div>
+                                                                    <span className="font-semibold flex justify-end">Rs.10,00,000</span>
+                                                                    <div className="text-sm flex justify-end pt-[2px]">Funding Disbursed</div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="border">
                                                             <div className="flex justify-between p-3">
-                                                                <div><FaMoneyCheck size={36}/></div>
+                                                                <div className="text-green-500"><FaMoneyCheck size={36}/></div>
                                                                 <div>
-                                                                    <span className="md:p-2 font-semibold">Rs.10,00,000</span>
-                                                                    <div className="text-sm font-semibold">Funding Disbursed</div>
+                                                                    <span className="font-semibold flex justify-end">Rs.10,00,000</span>
+                                                                    <div className="text-sm flex justify-end pt-[2px]">Funding Utilized</div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="border">
                                                             <div className="flex justify-between p-3">
-                                                                <div><FaMoneyCheck size={36}/></div>
+                                                                <div className="text-green-500"><FaMoneyCheck size={36}/></div>
                                                                 <div>
-                                                                    <span className="md:p-2 font-semibold">Rs.10,00,000</span>
-                                                                    <div className="text-sm font-semibold">Funding Disbursed</div>
+                                                                    <span className="font-semibold flex justify-end">Rs.10,00,000</span>
+                                                                    <div className="text-sm flex justify-end pt-[2px]">Balance</div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="border">
                                                             <div className="flex justify-between p-3">
-                                                                <div className=""><FaMoneyCheck size={36}/></div>
+                                                                <div className="text-green-500"><FaMoneyCheck size={36}/></div>
                                                                 <div>
-                                                                    <span className="md:p-2 font-semibold">Rs.10,00,000</span>
-                                                                    <div className="text-sm font-semibold">Funding Disbursed</div>
+                                                                    <span className="font-semibold flex justify-end">Rs.10,00,000</span>
+                                                                    <div className="text-sm flex justify-end pt-[2px]">External Funding</div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                 </div>
                                     </div>
-                            </div>
+
+                                    <div className="border">
+                                        <div className="grid grid-cols-2 gap-5 ms-2">
+                                             <div className="text-lg font-semibold flex justify-between">
+                                                <div>Documents</div>
+                                                <div className="mt-2"><FaPencil size={15}/></div>
+                                              </div>
+                                             <div className="text-lg font-semibold">
+                                                <div className="flex justify-between">
+                                                        <div className="">Awards & Recognitions</div>
+                                                        <div className="mt-2"><FaPencil size={15}/></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div><br></br>
                         </div>
                     </section>
     </div>

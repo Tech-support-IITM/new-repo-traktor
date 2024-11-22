@@ -1153,17 +1153,48 @@ const UpdateStartupStatusModel = async(startup_status, official_email_address) =
     })
 }
 const IndividualStarupModel = async(id) => {
-    return new Promise((resolve, reject) => {
-        client.query(`SELECT * FROM test_startup WHERE official_email_address=$1`, [id], (err, result) => {
-            if(err)
-            {
-                reject(err)
-            }
-            else
-            {
-                resolve(result)
-            }
+    const GeneralData = () => {
+        return new Promise((resolveQuery2, rejectQuery2) => {
+            client.query(`select t.basic, t.official, t.founder, t.description, t.official_email_address, t.startup_status, u.startup_name, u.amount, u.funding_type from test_startup t LEFT JOIN update_funding u ON t.official_email_address = u.startup_name WHERE t.official_email_address=$1 AND u.funding_type='Funding Distributed'`, [id], (err, result) => { //select t.basic, t.official_email_address, u.startup_name, u.amount, u.funding_type from test_startup t JOIN update_funding u ON t.official_email_address = u.startup_name;
+                if(err)
+                {
+                    //SELECT * FROM test_startup WHERE official_email_address=$1
+                    rejectQuery2(err)
+                }
+                else
+                {
+                    resolveQuery2(result)
+                }
+            })
         })
-    })
+    }
+
+    const FundingDistributes = () => {
+        return new Promise((resolveQuery1, rejectQuery1) => {
+            client.query("select u.funding_type, SUM(CAST(u.amount AS INTEGER)), u.startup_name from update_funding u JOIN test_startup t ON u.startup_name = t.official_email_address WHERE funding_type='Funding Utilized' AND startup_name=$1 GROUP BY u.funding_type, u.startup_name;", [id], (err, result) => {
+                if(err)
+                {     
+                    rejectQuery1(err)
+                }
+                else 
+                {
+                    resolveQuery1(result);
+                }
+            })
+        })
+    }
+
+    return new Promise((resolve, reject) => {
+        Promise.all([GeneralData(), FundingDistributes()])
+            .then(([generalData, fundingDistributes]) => {
+                resolve({
+                    GeneralData: generalData,
+                    FundingDistributes: fundingDistributes,
+                });
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
 }
 module.exports = {AddStartupModel, StartupDataModel, FetchStartupsModel, UpdateStartupStatusModel, IndividualStarupModel};

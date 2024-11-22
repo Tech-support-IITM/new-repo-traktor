@@ -230,11 +230,15 @@ const IndividualStartups = async(req, res) => {
     try
     {
         const result = await IndividualStarupModel(id);
-        res.status(200).json(result);
+        const IndStartupData = {
+            generalData : result.GeneralData.rows,
+            FundingDistributes: result.FundingDistributes.rows
+        }
+        res.status(200).json(IndStartupData);
     }
     catch(err)
     {
-        res.send(500).json(err);
+        res.status(500).json(err.message);
     }
 }
 module.exports = {AddStartup, FetchStartupDatainNumbers, FetchStartupData, UpdateStatus, IndividualStartups};

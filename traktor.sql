@@ -5,7 +5,7 @@
 -- Dumped from database version 16.2
 -- Dumped by pg_dump version 16.2
 
--- Started on 2024-11-19 12:33:48
+-- Started on 2024-11-28 12:23:10
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -457,7 +457,7 @@ ALTER TABLE ONLY public.update_funding ALTER COLUMN id SET DEFAULT nextval('publ
 --
 
 COPY pgagent.pga_jobagent (jagpid, jaglogintime, jagstation) FROM stdin;
-5000	2024-11-18 12:21:38.254012+05:30	EliteBook
+9648	2024-11-23 12:09:23.578337+05:30	EliteBook
 \.
 
 
@@ -736,6 +736,8 @@ zscsc	jp@gmail.com	12345678	Test
 
 COPY public.test_startup (basic, official, founder, description, official_email_address, startup_status) FROM stdin;
 {"cohort": "", "program": "Akshar", "startup_name": "Sukoon", "startup_tech": "Others", "startup_type": "", "startup_program": "Manufacturing & Industry", "startup_industry": "Industry 4.0"}	{"password": "", "linkedin_id": "", "website_link": "", "mentor_associated": "", "registration_number": "", "official_email_address": "ch19b076@smail.iitm.ac.in", "official_contact_number": "9049617869"}	{"linkedInid": "", "founder_name": "Phalgun Vyas", "founder_email": "ch19b076@smail.iitm.ac.in", "founder_gender": "Male", "founder_number": "9049617869", "founder_student_id": ""}	{"logo_image": "", "startup_description": "At Sukoon we are solving the problem of excessive heat stress, which impacts health & productivity of individuals working in heat intensive environments. We are creating the next generation Wearables which provide an unparalleled sensation of comfort through smart customised temperature controlled apparel."}	ch19b076@smail.iitm.ac.in	Active
+{"cohort": "a", "program": "a", "startup_name": "TARANG", "startup_tech": "a", "startup_type": "a", "startup_program": "a", "startup_industry": "a"}	{"password": "and", "linkedin_id": "akdjakdx", "website_link": "http://localhost:3003/ak", "mentor_associated": "akxj", "registration_number": "akdn", "official_email_address": "saths@gmail.com", "official_contact_number": "9962383309"}	{"linkedInid": "akjc", "founder_name": "alkd", "founder_email": "a,dm", "founder_gender": "akdh", "founder_number": "kajd", "founder_student_id": "akdjh"}	{"logo_image": "adn", "startup_description": "akcn"}	saths@gmail.com	Active
+{"cohort": "a", "program": "a", "startup_name": "check", "startup_tech": "a", "startup_type": "a", "startup_program": "a", "startup_industry": "a"}	{"password": "check", "linkedin_id": "chek", "website_link": "http://localhost:3003/check", "mentor_associated": "check", "registration_number": "check", "official_email_address": "check@gmail.com", "official_contact_number": "9962383109"}	{"linkedInid": "akjc", "founder_name": "alkd", "founder_email": "a,dm", "founder_gender": "akdh", "founder_number": "kajd", "founder_student_id": "akdjh"}	{"logo_image": "adn", "startup_description": "akcn"}	check@gmail.com	Active
 {"cohort": "", "program": "Akshar", "startup_name": "Seat of Joy", "startup_tech": "Others", "startup_type": "Service", "startup_program": "Hardware & IOT", "startup_industry": "Industry 4.0"}	{"password": "Seat123", "linkedin_id": "", "website_link": "", "mentor_associated": "", "registration_number": "", "official_email_address": "ed19b063@smail.iitm.ac.in", "official_contact_number": ""}	{"linkedInid": "", "founder_name": "Sai Gowtham Tamminaina", "founder_email": "ed19b063@smail.iitm.ac.in", "founder_gender": "Male", "founder_number": "", "founder_student_id": ""}	{"logo_image": "", "startup_description": ""}	ed19b063@smail.iitm.ac.in	Active
 {"cohort": "", "program": "Akshar", "startup_name": "Inbound Aerospace", "startup_tech": "Others", "startup_type": "Service", "startup_program": "Manufacturing & Industry", "startup_industry": "Industry 4.0"}	{"password": "Inbound123", "linkedin_id": "", "website_link": "", "mentor_associated": "", "registration_number": "", "official_email_address": "ae14d402@smail.iitm.ac.in", "official_contact_number": "8111927056"}	{"linkedInid": "", "founder_name": "Aravind I B", "founder_email": "ae14d402@smail.iitm.ac.in", "founder_gender": "Male", "founder_number": "8111927056", "founder_student_id": ""}	{"logo_image": "", "startup_description": ""}	ae14d402@smail.iitm.ac.in	Active
 {"cohort": "", "program": "Pratham", "startup_name": "i-Genie", "startup_tech": "Others", "startup_type": "Service", "startup_program": "services", "startup_industry": "Industry 4.0"}	{"password": "Igenie", "linkedin_id": "", "website_link": "", "mentor_associated": "", "registration_number": "", "official_email_address": "me23s401@smail.iitm.ac.in", "official_contact_number": "7014129168"}	{"linkedInid": "", "founder_name": "Srijan Tiwari", "founder_email": "me23s401@smail.iitm.ac.in", "founder_gender": "Male", "founder_number": "7014129168", "founder_student_id": ""}	{"logo_image": "", "startup_description": "i-Genie is a platform created to develop a market place for the global non-destructive testing and evaluation industries, as well as an educational platform for the NDT sector that includes academic courses as well as training certifications."}	me23s401@smail.iitm.ac.in	Graduated
@@ -939,7 +941,7 @@ ALTER TABLE ONLY public.user_data
     ADD CONSTRAINT user_data_user_mail_key UNIQUE (user_mail);
 
 
--- Completed on 2024-11-19 12:33:54
+-- Completed on 2024-11-28 12:23:13
 
 --
 -- PostgreSQL database dump complete

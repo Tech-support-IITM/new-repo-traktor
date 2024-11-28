@@ -112,7 +112,6 @@ function NavBar({toggleSideBar, socket}) {
     {
         console.log(err);
     }
-   
   }
   const[notification, SetNotification] = useState([])
   const UpdatedFundingData = async() => {

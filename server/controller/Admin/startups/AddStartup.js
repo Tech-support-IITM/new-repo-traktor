@@ -1,4 +1,4 @@
-const {AddStartupModel, StartupDataModel, FetchStartupsModel, UpdateStartupStatusModel, IndividualStarupModel} = require('../../../model/StartupModel');
+const {AddStartupModel, StartupDataModel, FetchStartupsModel, UpdateStartupStatusModel, IndividualStarupModel, CreateTeamUser, TopStartupsSectors} = require('../../../model/StartupModel');
 const EmailValid = require('../../../validation/EmailValid');
 const PhoneNumberValid = require('../../../validation/PhoneNumberValid');
 const AddStartup = async(req, res) => {
@@ -25,11 +25,23 @@ const AddStartup = async(req, res) => {
         try
         {
             const result = await AddStartupModel(basic, official, founder, description, official_email_address);
-            res.status(200).send(result);
+            if(result)
+            {
+                try 
+                {
+                    let response = await CreateTeamUser(founder_email, founder_number, official_email_address); 
+                    res.status(200).send(response);     
+                }
+                catch(err)
+                {
+                    res.status(501).send(err)
+                }
+            }
+            //res.status(200).send(result);
         }
         catch(err)
         {
-                res.send(err);
+                res.status(500).send(err);
         }
     }
 }
@@ -241,4 +253,17 @@ const IndividualStartups = async(req, res) => {
         res.status(500).json(err.message);
     }
 }
-module.exports = {AddStartup, FetchStartupDatainNumbers, FetchStartupData, UpdateStatus, IndividualStartups};
+
+const TopStartupsSectorsCont = async(req, res) => {
+    try 
+    {
+        const {id} = req.query
+        const result = await TopStartupsSectors(id);
+        res.send(result);
+    }
+    catch(err)
+    {
+        res.status(500).json(err)
+    }
+}
+module.exports = {AddStartup, FetchStartupDatainNumbers, FetchStartupData, UpdateStatus, IndividualStartups, TopStartupsSectorsCont};

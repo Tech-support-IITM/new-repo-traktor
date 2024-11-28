@@ -1,4 +1,6 @@
 const client = require('../utils/conn');
+const generatePassword = require('../utils/GeneratePassword');
+var md5 = require('md5');
 const AddStartupModel = async(basic, official, founder, description, official_email_address) => {
     return new Promise((resolve, reject)=> {
         client.query("INSERT INTO test_startup(basic, official, founder, description, official_email_address, startup_status) VALUES($1, $2, $3, $4, $5, $6)", [basic, official, founder, description, official_email_address, 'Active'], 
@@ -15,7 +17,22 @@ const AddStartupModel = async(basic, official, founder, description, official_em
         )
     })
 }
-
+const CreateTeamUser = (founder_email, founder_number, official_email_address) => {
+    return new Promise((resolve, reject) => {
+        client.query("INSERT INTO user_data(user_mail, user_password, user_hash, user_department, user_role, user_name, user_contact, personal_email) VALUES($1, $2, $3, $4, $5, $6, $7, $8)", [founder_email, generatePassword, md5(founder_email), 'student', '5', founder_number, official_contact_number, official_email_address], 
+            (err, result) => {
+                if(err)
+                {
+                    reject(err)
+                }
+                else
+                {
+                    resolve(result)
+                }
+            }
+        )
+    })
+}
 const StartupDataModel = async() => {
     return new Promise((resolve, reject) => {
             const TotalCountStartups = new Promise((resolveQuery1, rejectQuery1) => {
@@ -1155,7 +1172,7 @@ const UpdateStartupStatusModel = async(startup_status, official_email_address) =
 const IndividualStarupModel = async(id) => {
     const GeneralData = () => {
         return new Promise((resolveQuery2, rejectQuery2) => {
-            client.query(`select t.basic, t.official, t.founder, t.description, t.official_email_address, t.startup_status, u.startup_name, u.amount, u.funding_type from test_startup t LEFT JOIN update_funding u ON t.official_email_address = u.startup_name WHERE t.official_email_address=$1 AND u.funding_type='Funding Distributed'`, [id], (err, result) => { //select t.basic, t.official_email_address, u.startup_name, u.amount, u.funding_type from test_startup t JOIN update_funding u ON t.official_email_address = u.startup_name;
+            client.query(`select t.basic, t.official, t.founder, t.description, t.official_email_address, t.startup_status, u.startup_name, u.amount, u.funding_type from test_startup t LEFT JOIN update_funding u ON t.official_email_address = u.startup_name WHERE t.official_email_address=$1`, [id], (err, result) => { //select t.basic, t.official_email_address, u.startup_name, u.amount, u.funding_type from test_startup t JOIN update_funding u ON t.official_email_address = u.startup_name;
                 if(err)
                 {
                     //SELECT * FROM test_startup WHERE official_email_address=$1
@@ -1197,4 +1214,19 @@ const IndividualStarupModel = async(id) => {
             });
     });
 }
-module.exports = {AddStartupModel, StartupDataModel, FetchStartupsModel, UpdateStartupStatusModel, IndividualStarupModel};
+
+const TopStartupsSectors = (id) => {
+    return new Promise((resolve, reject) => {
+        client.query("select t.basic->>'startup_program' as sector, SUM(uf.amount), uf.funding_type AS funding_type from test_startup t JOIN update_funding uf ON uf.startup_name=t.official_email_address WHERE funding_type='Funding Distributed' GROUP BY t.basic->>'startup_program', uf.funding_type ORDER by sum DESC LIMIT $1;", [id], (err, result) => {
+            if(err)
+            {
+                reject(err)
+            }
+            else
+            {
+                resolve(result)
+            }
+        })
+    })
+}
+module.exports = {AddStartupModel, StartupDataModel, FetchStartupsModel, UpdateStartupStatusModel, IndividualStarupModel, CreateTeamUser, TopStartupsSectors};

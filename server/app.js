@@ -46,6 +46,7 @@ const ScheduleMentorMeeting = require('./routes/route');
 const UpdateStatus = require('./routes/route');
 const IndividualStartups = require('./routes/route');
 const IPdataUpload = require('./routes/route');
+const TopStartupsSectorsCont = require('./routes/route');
 // const {uploadFile, getFileStream} = require('./utils/s3');
 const multer = require('multer')
 const upload = multer({dest: 'uploads/'})
@@ -164,6 +165,7 @@ app.use('api/v1/', ViewNotification);
 app.use('api/v1/', DeleteConnection);
 app.use('api/v1/', DeleteMentorData);
 app.use('api/v1/', IPdataUpload);
+app.use('api/v1/', TopStartupsSectorsCont);
 module.exports = app;
 
 

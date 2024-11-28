@@ -8,6 +8,8 @@ import { FaIndianRupeeSign } from "react-icons/fa6";
 import FundingAksharPieChart from "../../../components/FundingAkshar";
 import FundingUtilized from "../../../components/FundingUtilizedFinance";
 import FundsRemaining from "../../../components/FundsRemaining";
+import TopFundingDistributed from "../../../components/TopFundingDistributed";
+import FundingByCohort from "../../../components/FundingByCohort";
 function HomeFinance(props){
     console.log(props.props)
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -20,6 +22,10 @@ function HomeFinance(props){
     };
     const handleButtonClick = (index) => {
         setSelectedIndex(selectedIndex === index ? null : index);
+    };
+    const [selectedTopSectors, setSelectedTopSectors] = useState(1);
+    const handleSectorChange = (event) => {
+        setSelectedTopSectors(Number(event.target.value));
     };
     return(
     
@@ -73,6 +79,38 @@ function HomeFinance(props){
                                                 <FundsRemaining props={props}/>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div className="col-span-4 gap-4">
+                                <div className="shadow-md font-semibold rounded-lg w-full md:h-[370px] border mt-2">
+                                    <div className="flex justify-between">
+                                        <div className="p-2">Most funded startup</div>
+                                        <select className="border border-gray-300 rounded-lg px-6 py-2 text-gray-700 bg-white shadow-sm focus:outline-none focus:ring-0 focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-50 ring:none m-2" onChange={handleSectorChange}>
+                                                <option value="1">Top 2 sectors</option>
+                                                <option value="2">Top 3 sectors</option>
+                                                <option value="3">Top 5 sectors</option>
+                                        </select>
+                                    </div>
+                                    <div className="flex justify-center items-center mb-1">
+                                            <div className="w-50 h-50 overflow-hidden">
+                                                <TopFundingDistributed selectedTopSectors={selectedTopSectors}/>
+                                            </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div className="col-span-4 gap-4">  
+                                <div className="shadow-md font-semibold rounded-lg w-full md:h-[370px] border mt-2">
+                                    <div className="flex justify-between">
+                                        <div className="p-2">Top 10 funded startups</div>
+                                        <select className="border border-gray-300 rounded-lg px-6 py-2 text-gray-700 bg-white shadow-sm focus:outline-none focus:ring-0 focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-50 ring:none m-2" onChange={handleSectorChange}>
+                                                <option value="1">Top 2 sectors</option>
+                                                <option value="2">Top 3 sectors</option>
+                                                <option value="3">Top 5 sectors</option>
+                                        </select>
+                                    </div>
+                                    <div className="flex justify-center items-center mb-1">
+                                            <FundingByCohort selectedTopSectors={selectedTopSectors}/>
                                     </div>
                                 </div>
                         </div>

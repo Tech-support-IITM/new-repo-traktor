@@ -123,6 +123,7 @@ const Step1 = ({formData, handleChange}) => {
         </option>
         <option value="Pratham">Pratham</option>
         <option value="Akshar">Akshar</option>
+        <option value="Graduated">Graduated</option>
       </select>
 
       <div class="relative mt-4">

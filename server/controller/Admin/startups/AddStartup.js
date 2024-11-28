@@ -25,19 +25,19 @@ const AddStartup = async(req, res) => {
         try
         {
             const result = await AddStartupModel(basic, official, founder, description, official_email_address);
-            if(result)
-            {
-                try 
-                {
-                    let response = await CreateTeamUser(founder_email, founder_number, official_email_address); 
-                    res.status(200).send(response);     
-                }
-                catch(err)
-                {
-                    res.status(501).send(err)
-                }
-            }
-            //res.status(200).send(result);
+            // if(result)
+            // {
+            //     try 
+            //     {
+            //         let response = await CreateTeamUser(founder_email, founder_number, official_email_address); 
+            //         res.status(200).send(response);     
+            //     }
+            //     catch(err)
+            //     {
+            //         res.status(501).send(err)
+            //     }
+            // }
+            res.status(200).send(result);
         }
         catch(err)
         {

@@ -44,10 +44,12 @@ function Home() {
         setShow(true);
     }, [])
     const[analysedData, setAnalysedData]= useState([])
+    const isRemote = true;
+    const url = isRemote ? 'http://10.24.9.138:3003/api/v1/count-startupdata' : 'http://localhost:3003/api/v1/count-startupdata';
     const AnalysisData = async() => {
         try
         {
-            const result = await axios.get('http://localhost:3003/api/v1/count-startupdata');
+            const result = await axios.get(url);
             // console.log(result)
             setAnalysedData(result);
             setIsLoaded(true)

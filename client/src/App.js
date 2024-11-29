@@ -144,7 +144,6 @@ function App() {
                   <Route path="/customer/Startups" element={<CustomerStartup />} />
                   <Route path="/customer/contacts" element={<CustomerContacts />} />
              </Route>
-
              <Route  element={<ProtectedRoutes requiredRoles={[localStorage.getItem('token'), '3']} />} >
                   <Route path="/finance/home" element={<FinanceHome/>} />
                   <Route path="/fin/updatefunding" element={<FinanceUpdateFunding/>} />

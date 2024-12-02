@@ -129,6 +129,18 @@ function Connection(){
                     console.log(err);
                 }
         }
+
+        const TagConnection = async() => {
+            try 
+            {
+                const result = await axios.get('http://localhost:3003/api/v1/');
+                console.log(result);
+            }
+            catch(err)
+            {
+                console.log(err); n 
+            }
+        }
     // console.log(data);
     const [show, setShow] = useState(false);
     useEffect(() => {
@@ -227,7 +239,7 @@ function Connection(){
                         <h1 className="text-gray-500 text-xl">Tag Connection</h1>
                         <div className="grid grid-cols-2 p-3 gap-4 mt-3">
                                     <div>
-                                        <select id="small" name="startup" onChange={handleChangeEst} className="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <select id="small" name="startup" onChange={handleChangeEst} className="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Select Startup</option>
                                             {data.map((dataObj, Index) => {
                                                 return <option value={dataObj.official_email_address}>{dataObj.startup_name}</option>
@@ -235,7 +247,7 @@ function Connection(){
                                         </select>
                                     </div>
                                     <div>
-                                        <select id="small" name="connection" onChange={handleChangeEst} className="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <select id="small" name="connection" onChange={handleChangeEst} className="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Select Contact</option>
                                             {availableconnection.map((dataObj, Index) => {
                                                 return <option value={dataObj.email_address}>{dataObj.connection_name}</option>

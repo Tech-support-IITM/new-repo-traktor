@@ -2,7 +2,7 @@ const { escape } = require('validator');
 const EmailValid = require('../../../validation/EmailValid');
 const {Decrypted} = require('../../../helpers/Encryption');
 const PhoneNumberValid = require('../../../validation/PhoneNumberValid')
-const {AddConnectionModel, ViewConnectionModel, EstablishConnectionModel, DeleteConnectionModel}  = require('../../../model/ConnectionModel');
+const {AddConnectionModel, ViewConnectionModel, EstablishConnectionModel, DeleteConnectionModel, AvailableConnectionModel}  = require('../../../model/ConnectionModel');
 const AddConnections = async(req, res) => {
     const{name, designation, organisation, connect_for, contact_number, email_address} = req.body;
     if(!name || !designation || !organisation || !connect_for || !contact_number || !email_address)
@@ -84,4 +84,16 @@ const DeleteConnection = async(req,res) => {
         console.error(err);
     }
 }
-module.exports = {AddConnections, ViewConnections, EstablishConnection, DeleteConnection};
+
+const AvailConnections = async(req, res) => {
+    try
+    {
+        const result = await AvailableConnectionModel();
+        res.status(201).send(result);
+    }
+    catch(err)
+    {
+        res.status(500).send(err);
+    }
+}
+module.exports = {AddConnections, ViewConnections, EstablishConnection, DeleteConnection, AvailConnections};

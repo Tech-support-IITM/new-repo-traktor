@@ -9,6 +9,7 @@ import { FaGear, FaPage4, FaPencil, FaTrashCan } from "react-icons/fa6";
 import { ApiAddConnections, ApiViewConnections, ApiEstablishConnections, ApiDeleteConnections } from "../../API/API";
 import '../../components/styles/style.css';
 import toast from 'react-hot-toast';
+import axios from "axios";
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 import { Encryption } from "../../utils/Enc";
@@ -80,7 +81,7 @@ function Connection(){
             else {
                 console.log(err.message);
             }
-          }
+            }
         }
         const EstablishButton = async(e) => {
             e.preventDefault();
@@ -134,6 +135,26 @@ function Connection(){
         setShow(true);
         ViewConnection();
     }, [])
+
+    const [availableconnection, setAvailableConnections] = useState([])
+
+    const getAvailableConnectionsDetails = async() => {
+        try
+        {
+                const response = await axios.get('http://localhost:3003/api/v1/avail-connections');
+                console.log(response.data.rows)
+                setAvailableConnections(response.data.rows);
+        }
+        catch(err)
+        {
+                console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        getAvailableConnectionsDetails()
+    },[])
+    //console.log(data)
     return (
         <div className="flex h-screen">
             <section className="">
@@ -150,7 +171,7 @@ function Connection(){
                                             <div className="flex justify-center items-center "><button className="px-3 py-4 active:scale-[.98] active:duration-75 hover:scale-[1.08] ease-in-out transition-all" style={{color: '#0b5f66'}} onClick={handleShow}><FaPlusCircle size={55  }/></button></div>
                                             <div className="text-center text-gray-500">ADD CONNECTION</div>
                                 </div>
-                                {data.map((dataObj, index) => {
+                                {availableconnection.map((dataObj, index) => {
                                         let email_address = dataObj.email_address;
                                         return <div className="shadow-md font-semibold rounded-lg w-[100%;]" style={{backgroundColor: '#afdade'}}> 
                                                         <div className="flex justify-between p-3 text-xs border-b">
@@ -209,14 +230,14 @@ function Connection(){
                                         <select id="small" name="startup" onChange={handleChangeEst} className="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Select Startup</option>
                                             {data.map((dataObj, Index) => {
-                                                return <option value={dataObj.email_address}>{dataObj.email_address}</option>
+                                                return <option value={dataObj.official_email_address}>{dataObj.startup_name}</option>
                                             })}
                                         </select>
                                     </div>
                                     <div>
                                         <select id="small" name="connection" onChange={handleChangeEst} className="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Select Contact</option>
-                                            {data.map((dataObj, Index) => {
+                                            {availableconnection.map((dataObj, Index) => {
                                                 return <option value={dataObj.email_address}>{dataObj.connection_name}</option>
                                             })}
                                         </select>

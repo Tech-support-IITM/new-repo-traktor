@@ -24,7 +24,7 @@ const AddConnectionModel = async(name, organisation, connect_for, contact_number
 
 const ViewConnectionModel = async() => {
     return new Promise((resolve, reject)=>{
-        client.query("SELECT * FROM establish_connections", (err, result) => {
+        client.query("select basic->>'startup_name' AS startup_name, official_email_address  from test_startup;", (err, result) => {
             if(err)
             {
                 reject(err);
@@ -37,6 +37,20 @@ const ViewConnectionModel = async() => {
     })
 }
 
+const AvailableConnectionModel = async() => {
+    return new Promise((resolve, reject) => {
+        client.query('select * from establish_connections;', (err, result) => {
+            if(err)
+            {
+                reject(err);
+            }
+            else
+            {
+                resolve(result)
+            }
+        })
+    })
+}
 const EstablishConnectionModel = async(startup, connection, email_content, user_role) => {
     return new Promise((resolve, reject)=>{
         client.query("INSERT INTO tag_connection(startup_team_mail, connection_email, email_content, user_role) VALUES($1, $2, $3, $4)", [startup, connection, email_content, user_role], (err, result)=> {
@@ -66,4 +80,4 @@ const DeleteConnectionModel = async(email_address) => {
         })
     })
 }
-module.exports = {AddConnectionModel, ViewConnectionModel, EstablishConnectionModel, DeleteConnectionModel};
+module.exports = {AddConnectionModel, ViewConnectionModel, EstablishConnectionModel, DeleteConnectionModel, AvailableConnectionModel};

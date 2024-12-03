@@ -65,10 +65,9 @@ const EstablishConnection = async(req, res) => {
     }
     catch(err)
     {
-        res.send(err);
+        res.status(500).send(err);
     }
 }
-
 const DeleteConnection = async(req,res) => {
     try {
         let email_address = req.query.element_data;

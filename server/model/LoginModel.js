@@ -21,8 +21,9 @@ const LoginModel = (user_mail, user_password) => {
                     let role = result.rows[0].user_role;
                     let department = result.rows[0].user_department;
                     let token_data = role + '' + user_mail
+                    let hash = result.rows[0].user_hash;
                     const accessToken = jwt.sign({user_mail}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '30m'});
-                    resolve({ accessToken: accessToken, id: user_mail, role: role, department: department, status: 'Login Authenticated'});
+                    resolve({ accessToken: accessToken, id: user_mail, hash: hash,role: role, department: department, status: 'Login Authenticated'});
                     if(result.rows[0].user_role === 2)
                     {
                         resolve({authenticationLevel: "Admin"});

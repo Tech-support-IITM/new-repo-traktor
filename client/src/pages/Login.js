@@ -119,7 +119,7 @@ function Login() {
                         {
                             if(response.data.result.role === 5)
                             {
-                                navigate('/customer/Profile');
+                                navigate(`/customer/profile/${response.data.result.hash}`);
                             }
                             else if(response.data.result.role === 2)
                             {

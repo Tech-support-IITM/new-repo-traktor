@@ -34,6 +34,8 @@ const AddJob = require('../controller/Team/AddJob.js');
 const {AddFunding, updateFundingNotif} = require('../controller/Finance/AddFunding.js');
 const {ScheduleMentorMeeting} = require('../controller/Admin/Mentorship/Mentorship.js');
 const IPdataUpload = require('../controller/Office/IPdata.js');
+const FetchIndTeamData = require('../controller/Team/Team.js')
+router.get('/fetch-team-data', FetchIndTeamData);
 router.get('/avail-connections', AvailConnections);
 router.get('/prof', ProfilePhoto);
 router.put('/update-status', UpdateStatus)

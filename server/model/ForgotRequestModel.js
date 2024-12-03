@@ -1,6 +1,6 @@
 const client = require('../utils/conn');
 const nodemailer = require('nodemailer');
-const ForgotPasswordEmailer = require("../components/ForgotPasswordEmailer");
+const Emailer = require("../components/Emailer");
 // const {sendEmail} = require("../utils/SendEmail")
 const ForgotRequestModel = (email_prompt) => {
     return new Promise((resolve, reject)=>{

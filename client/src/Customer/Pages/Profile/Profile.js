@@ -11,6 +11,8 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import alertify from "alertifyjs";
 import Aboutedit from "../../components/Aboutedit";
+import { useParams } from "react-router-dom";
+import { CookiesProvider, useCookies } from 'react-cookie'
 function CustomerProfile() {
   const [showFoundernew, setFoundernew] = useState(false);
   const [showMembernew, setMembernew] = useState(false);
@@ -99,6 +101,21 @@ function CustomerProfile() {
         }
     }
   }
+  let {userHash} = useParams();
+  const [cookie, setCookie] = useCookies(['user'])
+  setCookie('user', userHash, {path: '/'});
+
+  const letHash = async() => {
+        try
+        {
+          const result = await axios.get('');
+          return result;
+        }
+        catch(err)
+        {
+          console.error(err)
+        }
+  }
   return (
     <div className="flex h-screen">
       <section className="fixed h-full">
@@ -119,7 +136,7 @@ function CustomerProfile() {
             }
             className="active:scale-[.90] active:duration-70 hover:scale-[1.02] border border-green-300 rounded-md bg-green-500 transition-all ease-in-out md:text-xs font-semibold p-2 m-1  text-white"
           >
-            <span>Apply Now</span>
+            <span>Apply</span>
           </button>
         </div>
         <div className="flex flex-col p-2 m-12 border ">

@@ -136,7 +136,7 @@ function App() {
                   <Route path="/customer/resources" element={<Resource/>} />
                   <Route path="/customer/Mentor" element={<CustomerMentor/>} />
                   <Route path="/customer/jobs" element={<Jobs />} />
-                  <Route path="/customer/profile" element={<CustomerProfile />} />
+                  <Route path="/customer/profile/:userHash" element={<CustomerProfile />} />
                   <Route path="/jobs/new" element={<Addjob />} />
                   <Route path="/Profile/addprofile" element={<Profileapply/>} />
                   <Route path="/customer/DE" element={<DisEnt />} />

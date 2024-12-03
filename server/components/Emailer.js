@@ -2,7 +2,7 @@ const e = require('express');
 const nodemailer = require('nodemailer');
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
-const ForgotPassword = async(email_prompt) => {
+const Mailer = async(email_prompt) => {
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
@@ -28,4 +28,4 @@ const ForgotPassword = async(email_prompt) => {
         return err;
     }
 }
-module.exports = ForgotPassword;
+module.exports = Mailer;

@@ -2,9 +2,7 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
-
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
-
 const FundingUtilized = (props) => {
   console.log(props)
   const data = {
@@ -28,7 +26,6 @@ const FundingUtilized = (props) => {
       },
     ],
   };
-
   const options = {
     responsive: true,
     plugins: {
@@ -51,10 +48,8 @@ const FundingUtilized = (props) => {
       },
     },
   };
-
   return (
     <div>
-      {/* <h2>Donut Chart</h2> */}
       <Doughnut data={data} options={options} />
     </div>
   );

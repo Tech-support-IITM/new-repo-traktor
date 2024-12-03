@@ -24,6 +24,18 @@ async function ApiViewConnections()
     }
 }
 
+async function ApiEmail() 
+{
+    try 
+    {
+        const result = await axios.post(`http://localhost:3003/api/v1/`)
+        return result;
+    }
+    catch(err)
+    {
+        console.error(err);
+    }
+}
 async function ApiEstablishConnections(EstablishConnection)
 {
     try

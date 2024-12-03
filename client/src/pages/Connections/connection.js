@@ -147,9 +147,7 @@ function Connection(){
         setShow(true);
         ViewConnection();
     }, [])
-
     const [availableconnection, setAvailableConnections] = useState([])
-
     const getAvailableConnectionsDetails = async() => {
         try
         {
@@ -162,7 +160,6 @@ function Connection(){
                 console.log(err);
         }
     }
-
     useEffect(() => {
         getAvailableConnectionsDetails()
     },[])

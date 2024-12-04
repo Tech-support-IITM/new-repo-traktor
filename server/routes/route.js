@@ -70,7 +70,7 @@ router.get('/viewconnections', ViewConnections);
 router.post('/post-job', Authenticate, Job);
 router.get('/fetch-report-data', Report);
 router.post('/establish-connection', EstablishConnection);
-router.put('/customer/founder-update', Founder);
+router.post('/customer/founder-update', Founder);
 router.post('/customer/teams-update', TeamMember);
 router.post('/customer/aws-credit-apply', AwsCredits);
 router.post('/customer/raise-request', RaiseRequest);

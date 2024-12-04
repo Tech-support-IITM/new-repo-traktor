@@ -1,13 +1,13 @@
 const FounderModel = require('../../model/CustomerModel/FounderModel');
 const Founder = async (req, res) => {
-    const{session_mail} = req.query;
+    // const{session_mail} = req.query;
     const {founder_name,
         founder_email,
         founder_number,
         founder_gender,
         founder_student_id,
         founder_linkedin,
-        founder_role} = req.body;
+        founder_role, session_mail} = req.body;
     if(session_mail)  
     {
         if(!founder_name || !founder_email || !founder_number || !founder_gender || !founder_student_id || !founder_linkedin || !founder_role)
@@ -31,7 +31,7 @@ const Founder = async (req, res) => {
             catch (err)
             {
                 
-                res.status(404).json({error: 'Internal Server Error', err: err});
+                res.status(500).json({error: 'Internal Server Error', err: err});
             }
         }
     }

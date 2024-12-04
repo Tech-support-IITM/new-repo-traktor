@@ -9,7 +9,7 @@ const Founder = async (founder_name,
     founder_role, 
     session_mail) => {
     return new Promise((resolve, reject) => {
-        client.query(`UPDATE founder_details SET name = $1, email= $2, number = $3, gender = $4, studentid = $5, linkedin = $6, role = $7 WHERE email = $8`, 
+        client.query(`INSERT INTO founder_details(name, email, number, gender, studentid, linkedin, role, mail_address) VALUES($1, $2, $3, $4, $5, $6, $7, $8)`, 
             [founder_name,
             founder_email,
             founder_number,

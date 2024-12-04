@@ -53,6 +53,7 @@ const upload = multer({dest: 'uploads/'})
 const app = express();
 const ProfilePhoto = require('./routes/route');
 const AvailConnections = require('./routes/route');
+const FetchIndTeamData = require('./routes/route');
 const http = require('http').createServer(app);
 var io = require('socket.io')(http, {
     cors: {
@@ -119,6 +120,7 @@ io.on('connection', function(socket) {
         removeUser(socket.id);
     });
 })
+app.use('api/v1/', FetchIndTeamData);
 app.use('api/v1/', AvailConnections);
 app.use('api/v1/', IndividualStartups);
 app.use('api/v1/', ProfilePhoto);

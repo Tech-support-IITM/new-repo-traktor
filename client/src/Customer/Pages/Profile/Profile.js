@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../../components/SideBar";
 import NavBar from "../../../components/NavBar";
 import { FaEye, FaPen } from "react-icons/fa";
@@ -12,14 +12,15 @@ import axios from "axios";
 import alertify from "alertifyjs";
 import Aboutedit from "../../components/Aboutedit";
 import { useParams } from "react-router-dom";
-import { CookiesProvider, useCookies } from 'react-cookie'
+import { CookiesProvider, useCookies } from 'react-cookie';
+//import { jwtDecode } from "jwt-decode";
 function CustomerProfile() {
+  let session_mail = jwtDecode(localStorage.getItem('token'));
   const [showFoundernew, setFoundernew] = useState(false);
   const [showMembernew, setMembernew] = useState(false);
   const [showUploadocument, setUploadocument] = useState(false);
   const [showAwards, setAwards] = useState(false);
   const [showAboutedit, setAboutedit] = useState(false);
-
   const[founderFormData, setFounderFormData] = useState({
     founder_name: '',
     founder_email: '',
@@ -27,9 +28,9 @@ function CustomerProfile() {
     founder_gender: '',
     founder_student_id: 0,
     founder_linkedin: '',
-    founder_role: ''
+    founder_role: '',
+    session_mail: session_mail.user_mail
   });
-
   const[memberFormData, setMemberFormData] = useState({
     team_name: '',
     team_email: '',
@@ -45,15 +46,32 @@ function CustomerProfile() {
     })) 
   }
   //console.log(memberFormData);
-  let session_mail = jwtDecode(localStorage.getItem('token'));
+  
   console.log(session_mail.user_mail);
   const handleSubmit = async(e) => {
         e.preventDefault()
         try{
-            const result = await axios.put(`http://localhost:3003/api/v1/customer/founder-update?session_mail=${session_mail.user_mail}`,founderFormData, {headers: {
+            const result = await axios.post(`http://localhost:3003/api/v1/customer/founder-update`,founderFormData, {headers: {
                 // 'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
             }});
+            if(result)
+            {
+                setFoundernew(false)
+                alertify.success('Done')
+                setFounderFormData({
+                    founder_name: '',
+                    founder_email: '',
+                    founder_number: 0,
+                    founder_gender: '',
+                    founder_student_id: 0,
+                    founder_linkedin: '',
+                    founder_role: '',
+                    session_mail: session_mail.user_mail
+                })
+
+            }
+            //console.log(result);
         }
         catch(err)
         {
@@ -104,18 +122,22 @@ function CustomerProfile() {
   let {userHash} = useParams();
   const [cookie, setCookie] = useCookies(['user'])
   setCookie('user', userHash, {path: '/'});
-
-  const letHash = async() => {
+  const [individualUserData, setIndividualUserData] = useState([]);
+  const GetUserData = async() => {
         try
         {
-          const result = await axios.get('');
-          return result;
+          const result = await axios.get(`http://localhost:3003/api/v1/fetch-team-data?userHash=${userHash}&email=${session_mail.user_mail}`);
+          console.log(result.data.rows);
+          setIndividualUserData(result.data.rows)
         }
         catch(err)
         {
           console.error(err)
         }
   }
+  useEffect(() => {
+    GetUserData();
+  }, [])
   return (
     <div className="flex h-screen">
       <section className="fixed h-full">
@@ -159,8 +181,7 @@ function CustomerProfile() {
             </div>
           </div>
           <p className="text-gray-700">
-            We are a knowledge-based company providing enhanced solutions to
-            industries.
+            {individualUserData[0]?.description?.startup_description || "No data is available"}
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4 p-2 m-12 border ">

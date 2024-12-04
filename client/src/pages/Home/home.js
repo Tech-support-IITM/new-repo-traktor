@@ -33,7 +33,7 @@ function Home() {
             setAnalysis('home');
         } else {
             setSelectedIndex(index);
-            const analysisOptions = ['home', 'teams', 'mentors', 'finance'];
+            const analysisOptions = ['home', 'teams', 'mentors', 'finance', 'investor'];
             setAnalysis(analysisOptions[index]);
         }
     };
@@ -76,7 +76,7 @@ function Home() {
                             <NavBar />
                         </div>
                         <div className="p-[90px;] h-full">
-                                <div className="flex justify-between items-center mb-1 ms-[750px;]">
+                                <div className="flex justify-between items-center mb-1 ms-[750px;]"> 
                                          {color.map((colors, index) => (
                                             <button
                                             key={index}

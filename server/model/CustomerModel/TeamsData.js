@@ -5,6 +5,7 @@ const TeamsData = (EmailAddress, userHash) => {
                 if(err)
                 {
                     reject(err)
+                    console.log(err);
                 }
                 else
                 {

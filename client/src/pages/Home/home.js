@@ -76,7 +76,7 @@ function Home() {
                             <NavBar />
                         </div>
                         <div className="p-[90px;] h-full">
-                                <div className="flex justify-between items-center mb-1 ms-[750px;]"> 
+                                <div className="flex justify-between items-center sm:mb-2 lg:mb-10 md:ms-[750px] xl:ms-[700px]"> 
                                          {color.map((colors, index) => (
                                             <button
                                             key={index}
@@ -86,7 +86,7 @@ function Home() {
                                              }}
                                             onClick={() => handleButtonClick(index)}
                                             >
-                                            {['Home', 'Teams', 'Mentors', 'Finance'][index]}
+                                            {['Home', 'Teams', 'Mentors', 'Finance', 'Investor'][index]}
                                             </button>
                                         ))}
                                 </div>
